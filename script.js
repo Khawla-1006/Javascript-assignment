@@ -26,7 +26,8 @@ let isAlive = setInterval(function(){
     }
         //detect collision
     if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
-        alert("Game over! \n \nDo you want to play again?")
+        alert("Game over! \n \nDo you want to play again?");
+        location.reload();
     }
     
 },50)
