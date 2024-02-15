@@ -26,9 +26,13 @@ let isAlive = setInterval(function(){
     }
         //detect collision
     if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
-        alert("Game over! \n \nDo you want to play again?");
-        location.reload();
-    }
+        dino.classList.remove('gif-dino');
+        dino.classList.add('img-dino');          
+        setTimeout(() => {
+            alert("Game over! \n \nDo you want to play again?");
+            location.reload();
+          }, "10");
+    } 
     
 },50)
 
