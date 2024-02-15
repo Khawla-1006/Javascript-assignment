@@ -40,7 +40,7 @@ p{
 }
 
 .jump {
-    animation: jump 0.3s linear;
+    animation: jump 0.5s linear;
 }
 
 @keyframes jump {
@@ -48,13 +48,13 @@ p{
         top: 150px;
     }
     30% {
-        top: 130px;
+        top: 100px;
     }
     50% {
         top: 80px;
     }
     80% {
-        top: 130px;
+        top: 100px;
     }
     100% {
         top:  150px;
