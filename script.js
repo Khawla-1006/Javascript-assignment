@@ -25,9 +25,9 @@ let isAlive = setInterval(function(){
     }
         //detect collision   
     if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
+        gameOverSoundEffect();
         dino.classList.remove('gif-dino');
         dino.classList.add('img-dino');     
-        gameOverSoundEffect();
         setTimeout(() => {
             alert("Game over! \n \nDo you want to play again?");
             location.reload();
@@ -35,12 +35,10 @@ let isAlive = setInterval(function(){
     } 
 },50)
 
-
 document.addEventListener("keydown", function(event){
     jump();
     jumpSoundEffect();
 });
-
 
 function jumpSoundEffect(){
     const jumpSound = new Audio("./sounds/jump.wav");
