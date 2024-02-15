@@ -23,12 +23,16 @@ let isAlive = setInterval(function(){
     }else{
         cactus.style.display = "";
     }
-        //detect collision
-    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){    
+        //detect collision   
+    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
+        dino.classList.remove('gif-dino');
+        dino.classList.add('img-dino');     
         gameOverSoundEffect();
-        alert("Game over! \n \nDo you want to play again?");
-        location.reload();  
-    }  
+        setTimeout(() => {
+            alert("Game over! \n \nDo you want to play again?");
+            location.reload();
+          }, "10");
+    } 
 },50)
 
 
