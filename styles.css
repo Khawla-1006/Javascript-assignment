@@ -31,11 +31,18 @@ p{
 
 #dino{
     width: 50px;
-    height: 50px;    
-    background-image: url(images/dino.png);
+    height: 50px;     
     background-size: 50px 50px;
     position: relative;
     top: 150px;
+}
+
+.gif-dino{    
+    background-image: url(images/gif-dino.gif);    
+}
+
+.img-dino{    
+    background-image: url(images/dino.png);
 }
 
 .jump {
