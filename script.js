@@ -2,7 +2,6 @@ const dino = document.getElementById("dino");
 const cactus = document.getElementById("cactus");
 const score = document.getElementById("score");
 
-
 function jump(){
     if(dino.classList != "jump"){
     dino.classList.add("jump");
@@ -25,16 +24,28 @@ let isAlive = setInterval(function(){
         cactus.style.display = "";
     }
         //detect collision
-    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
+    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){    
+        gameOverSoundEffect();
         alert("Game over! \n \nDo you want to play again?");
-        location.reload();
-    }
-    
+        location.reload();  
+    }  
 },50)
 
 
 document.addEventListener("keydown", function(event){
     jump();
+    jumpSoundEffect();
 });
+
+
+function jumpSoundEffect(){
+    const jumpSound = new Audio("./sounds/jump.wav");
+    jumpSound.play();
+}
+
+function gameOverSoundEffect(){
+    const gameOverSound = new Audio("./sounds/over.wav");
+    gameOverSound.play();
+}
 
 
