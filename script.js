@@ -4,6 +4,7 @@ const score = document.getElementById("score");
 let gameSpeed = 2000;
 let cactusPosition = 580; 
 const cactusMoveInterval = 20; 
+let jumpedCactuses = 0;
 
 
 function jump(){
@@ -22,9 +23,14 @@ let isAlive = setInterval(function(){
         //get current cactus X position 
     let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"))
 
-    if(cactusLeft < 0){
+    if (cactusLeft < 0) {
         cactus.style.display = "none";
-    }else{
+        if (cactusPosition < 0) {
+            cactusPosition = 580; 
+            jumpedCactuses++;
+            cactjumped.innerText = jumpedCactuses;
+        }
+    } else {
         cactus.style.display = "";
     }
         //detect collision   
