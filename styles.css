@@ -75,7 +75,6 @@ p{
     left: 580px;
     background-image: url(images/cactus.png);
     background-size:  20px 40px;
-    animation: block 2s infinite linear;
 }
 
 @keyframes block {

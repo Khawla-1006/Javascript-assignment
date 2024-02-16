@@ -1,6 +1,10 @@
 const dino = document.getElementById("dino");
 const cactus = document.getElementById("cactus");
 const score = document.getElementById("score");
+let gameSpeed = 2000;
+let cactusPosition = 580; 
+const cactusMoveInterval = 20; 
+
 
 function jump(){
     if(dino.classList != "jump"){
@@ -49,5 +53,24 @@ function gameOverSoundEffect(){
     const gameOverSound = new Audio("./sounds/over.wav");
     gameOverSound.play();
 }
+
+function moveCactus() {
+    cactusPosition -= 5; 
+    if (cactusPosition <= -20) {
+        cactusPosition = 580; 
+    }
+    cactus.style.left = `${cactusPosition}px`;
+}
+
+// Start moving the cactus
+let moveCactusInterval = setInterval(moveCactus, cactusMoveInterval);
+
+function increaseSpeed() {
+    clearInterval(moveCactusInterval); 
+    gameSpeed *= 0.9; 
+    moveCactusInterval = setInterval(moveCactus, gameSpeed / 100); 
+}
+
+setInterval(increaseSpeed, 5000);
 
 
