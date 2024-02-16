@@ -40,6 +40,7 @@ let isAlive = setInterval(function(){
         dino.classList.add('img-dino');     
         setTimeout(() => {
             alert("Game over! \n \nDo you want to play again?");
+            clearInterval(isAlive)
             location.reload();
           }, "10");
     } 
