@@ -1,17 +1,12 @@
 const dino = document.getElementById("dino");
-const cactus = document.getElementById("cactus");
+const cactus = document.querySelector(".cactus1");
 const score = document.getElementById("score");
 const gameOverEl = document.querySelector(".game-over");
 const resetBtnEl = document.querySelector(".reset");
 
-const cactusMoveInterval = 20; 
 
 let playerScore=0;
 let gameEnded = false;
-let gameSpeed = 2000;
-let cactusPosition = 580; 
-
-let jumpedCactuses = 0;
 
 function incrementScore() {
     if (!gameEnded) {
@@ -21,11 +16,11 @@ function incrementScore() {
 }
 
 function updateScoreDisplay() {
-    score.innerText = playerScore;
-    if(playerScore % 100 === 0 && playerScore !==0){
-     rewardSound();
-    } 
- }
+   score.innerText = playerScore;
+   if(playerScore % 100 === 0 && playerScore !==0){
+    rewardSound();
+   } 
+}
 
 function jump(){
     if(dino.classList != "jump"){
@@ -37,31 +32,27 @@ function jump(){
 
 let isAlive = setInterval(function(){
     incrementScore();
-    
+        //get current dino Y position
     let dinoTop= parseInt(window.getComputedStyle(dino).getPropertyValue("top"))
 
+        //get current cactus X position 
     let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"))
 
-    if (cactusLeft < 0) {
+    if(cactusLeft < 0){
         cactus.style.display = "none";
-        if (cactusPosition < 0) {
-            cactusPosition = 580; 
-            jumpedCactuses++;
-            cactjumped.innerText = jumpedCactuses;
-        }
-    } else {
+    }else{
         cactus.style.display = "";
     }
-    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
-        // gameOverSoundEffect();
-        gameOverMod();  
-    }
+        //detect collision   
+    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){  
+        gameOverMod();
+    } 
 },50)
 
 document.addEventListener("keydown", function(event){
     jump();
     jumpSoundEffect();
-});
+}); 
 
 function jumpSoundEffect(){
     const jumpSound = new Audio("./sounds/jump.wav");
@@ -72,59 +63,34 @@ function gameOverSoundEffect(){
     const gameOverSound = new Audio("./sounds/over.wav");
     gameOverSound.play();
 }
-
 function rewardSound(){
-    const rewardSound = new Audio("./sounds/reward.wav");
+    const rewardSound = new Audio("./sounds/100points.wav");
     rewardSound.play();
 }
 
+
 function gameOverMod(){
     gameEnded = true;
-    // gameOverSoundEffect();
+    gameOverSoundEffect();
     dino.classList.remove('gif-dino');
-    dino.classList.add('dino-dead');    
+    dino.classList.add('img-dino');    
     gameOverEl.classList.add('active');
     resetBtnEl.classList.add('active');
     document.querySelector(".game").style.animation = "none";
-    clearInterval(moveCactusInterval);
+    cactus.style.animation = "none"; 
 }
 
 resetBtnEl.addEventListener("click", () =>{
     playerScore = 0;
-    jumpedCactuses = 0;
     gameEnded = false;
     dino.classList.add('gif-dino');
-    dino.classList.remove('dino-dead');
+    dino.classList.remove('img-dino');
     gameOverEl.classList.remove('active');
     resetBtnEl.classList.remove('active');
     document.querySelector(".game").style.animation = "trackMove 4.2s linear infinite forwards"
-    cactjumped.innerText = jumpedCactuses;
-    clearInterval(moveCactusInterval); 
-    cactusPosition = 580;
-    moveCactusInterval = setInterval(moveCactus, cactusMoveInterval);
+    cactus.style.animation = " block 2s infinite linear";
 })
 
-function moveCactus() {
-    if(!gameEnded){
-        cactusPosition -= 5; 
-        if (cactusPosition <= -20) {
-            cactusPosition = 580; 
-        }
-        cactus.style.left = `${cactusPosition}px`;
-    }
-}
 
-let moveCactusInterval = setInterval(moveCactus, cactusMoveInterval);
-
-function increaseSpeed() {
-    if(gameSpeed > 500){
-        clearInterval(moveCactusInterval); 
-        gameSpeed *= 0.5; 
-        moveCactusInterval = setInterval(moveCactus, gameSpeed / 100); 
-    }
-   
-}
-
-setInterval(increaseSpeed, 5000);
 
 
