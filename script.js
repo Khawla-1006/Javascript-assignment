@@ -77,30 +77,37 @@ function resetGame(){
     cactusPosition = 580;
     moveCactusInterval = setInterval(moveCactus, cactusMoveInterval);
     gameSpeed = 2000;
+    checkIsAlive();
+
 }
- 
-let isAlive = setInterval(function(){
-    incrementScore();
-    
-    let dinoTop= parseInt(window.getComputedStyle(dino).getPropertyValue("top"))
 
-    let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"))
+function checkIsAlive(){
+    let isAlive = setInterval(function(){
+        incrementScore();
+        
+        let dinoTop= parseInt(window.getComputedStyle(dino).getPropertyValue("top"))
 
-    if (cactusLeft < 0) {
-        cactus.style.display = "none";
-        if (cactusPosition < 0) {
-            cactusPosition = 580; 
-            jumpedCactuses++;
-            cactjumped.innerText = jumpedCactuses;
+        let cactusLeft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"))
+
+        if (cactusLeft < 0) {
+            cactus.style.display = "none";
+            if (cactusPosition < 0) {
+                cactusPosition = 580; 
+                jumpedCactuses++;
+                cactjumped.innerText = jumpedCactuses;
+            }
+        } else {
+            cactus.style.display = "";
         }
-    } else {
-        cactus.style.display = "";
-    }
-    if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
-        gameOverSoundEffect();
-        gameOverMod();  
-    }
-},50)
+        if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140){
+            gameOverSoundEffect();
+            gameOverMod();
+            clearInterval(isAlive);
+        }
+    },50)
+}
+
+checkIsAlive();
 
 document.addEventListener("keydown", function(event){
     jump();
@@ -114,7 +121,10 @@ function jumpSoundEffect(){
 
 function gameOverSoundEffect(){
     const gameOverSound = new Audio("./sounds/over.wav");
-    gameOverSound.play();
+    const playSound = gameOverSound.play();
+    playSound.catch(() => {
+        // ignore the error when trying to play without interaction
+    })
 }
 
 function rewardSound(){
