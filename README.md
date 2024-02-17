@@ -6,6 +6,10 @@ Our goal was to create a game similar to the T-Rex game in Google Chrome, where 
 ## 💻How it works?
 
 
+https://github.com/Khawla-1006/Javascript-assignment/assets/75817559/3d4a267a-e66e-49c7-a6d3-c4dd437a3333
+
+
+
 ## 👩‍💻 Development Rules
 **Character Movement:**
 
