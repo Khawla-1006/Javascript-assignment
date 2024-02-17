@@ -28,7 +28,7 @@ function updateScoreDisplay() {
  }
 
 function jump(){
-    if(dino.classList != "jump"){
+    if(!gameEnded && dino.classList != "jump"){
     dino.classList.add("jump");
     setTimeout(function(){
         dino.classList.remove("jump")
